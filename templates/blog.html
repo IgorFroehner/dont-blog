@@ -1,0 +1,66 @@
+{{define "content"}}
+<h1 class="text-2xl font-bold mb-6">Blog</h1>
+
+<!-- Search -->
+<div class="mb-6">
+    <input
+        type="search"
+        id="search-input"
+        placeholder="Search posts..."
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
+    >
+</div>
+
+<!-- Tags -->
+{{if .AllTags}}
+<div class="flex flex-wrap gap-2 mb-8">
+    <a href="/blog" class="text-xs px-3 py-1 rounded-full border {{if not .ActiveTag}}bg-accent text-white border-accent{{else}}border-gray-300 dark:border-gray-700 hover:border-accent dark:hover:border-accent-dark{{end}} transition-colors">All</a>
+    {{range .AllTags}}
+    <a href="/blog/tag/{{.}}" class="text-xs px-3 py-1 rounded-full border {{if eq . $.ActiveTag}}bg-accent text-white border-accent{{else}}border-gray-300 dark:border-gray-700 hover:border-accent dark:hover:border-accent-dark{{end}} transition-colors">{{.}}</a>
+    {{end}}
+</div>
+{{end}}
+
+<!-- Post list -->
+<div id="post-list" class="space-y-6">
+    {{range .Posts}}
+    <article class="post-item" data-title="{{.Title}}" data-tags="{{range .Tags}}{{.}} {{end}}" data-excerpt="{{.Excerpt}}">
+        <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
+            <time datetime="{{.Date.Format "2006-01-02"}}" class="text-sm text-gray-500 dark:text-gray-400 shrink-0">{{.Date.Format "Jan 2, 2006"}}</time>
+            <h2 class="text-lg font-medium">
+                <a href="/blog/{{.Slug}}" class="text-accent dark:text-accent-dark hover:underline">{{.Title}}</a>
+            </h2>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-1.5 ml-0 sm:ml-[calc(5rem+1rem)]">
+            {{range .Tags}}
+            <a href="/blog/tag/{{.}}" class="text-xs px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">{{.}}</a>
+            {{end}}
+        </div>
+        {{if .Excerpt}}
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1.5 ml-0 sm:ml-[calc(5rem+1rem)]">{{.Excerpt}}</p>
+        {{end}}
+    </article>
+    {{end}}
+</div>
+
+<div id="no-results" class="hidden text-center text-gray-500 dark:text-gray-400 py-8">
+    No posts found.
+</div>
+
+<!-- Pagination -->
+{{if gt .TotalPages 1}}
+<nav class="flex justify-between items-center mt-10 pt-6 border-t border-gray-200 dark:border-gray-800">
+    {{if gt .Page 1}}
+    <a href="{{if eq .Page 2}}/blog{{else}}/blog/page/{{subtract .Page 1}}{{end}}" class="text-sm text-accent dark:text-accent-dark hover:underline">&larr; Newer</a>
+    {{else}}
+    <span></span>
+    {{end}}
+    <span class="text-sm text-gray-500 dark:text-gray-400">Page {{.Page}} of {{.TotalPages}}</span>
+    {{if lt .Page .TotalPages}}
+    <a href="/blog/page/{{add .Page 1}}" class="text-sm text-accent dark:text-accent-dark hover:underline">Older &rarr;</a>
+    {{else}}
+    <span></span>
+    {{end}}
+</nav>
+{{end}}
+{{end}}

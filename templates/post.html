@@ -1,0 +1,40 @@
+{{define "content"}}
+<article>
+    <header class="mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold mb-3 leading-tight">{{.Post.Title}}</h1>
+        <div class="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
+            <time datetime="{{.Post.Date.Format "2006-01-02"}}">{{.Post.Date.Format "January 2, 2006"}}</time>
+            {{if .Post.Tags}}
+            <span class="text-gray-300 dark:text-gray-600">&middot;</span>
+            <div class="flex flex-wrap gap-1.5">
+                {{range .Post.Tags}}
+                <a href="/blog/tag/{{.}}" class="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full text-xs hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">{{.}}</a>
+                {{end}}
+            </div>
+            {{end}}
+        </div>
+    </header>
+
+    <div class="prose prose-lg dark:prose-invert prose-a:text-accent dark:prose-a:text-accent-dark max-w-none">
+        {{.Post.HTMLContent}}
+    </div>
+
+    <nav class="mt-12 pt-6 border-t border-gray-200 dark:border-gray-800">
+        <div class="flex justify-between text-sm">
+            {{if .Post.Prev}}
+            <a href="/blog/{{.Post.Prev.Slug}}" class="text-accent dark:text-accent-dark hover:underline">&larr; {{.Post.Prev.Title}}</a>
+            {{else}}
+            <span></span>
+            {{end}}
+            {{if .Post.Next}}
+            <a href="/blog/{{.Post.Next.Slug}}" class="text-accent dark:text-accent-dark hover:underline">{{.Post.Next.Title}} &rarr;</a>
+            {{else}}
+            <span></span>
+            {{end}}
+        </div>
+        <div class="mt-4">
+            <a href="/blog" class="text-sm text-gray-500 dark:text-gray-400 hover:text-accent dark:hover:text-accent-dark">&larr; Back to blog</a>
+        </div>
+    </nav>
+</article>
+{{end}}

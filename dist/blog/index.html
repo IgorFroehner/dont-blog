@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog — IF</title>
+    <meta name="description" content="Personal blog and project showcase">
+    <meta name="author" content="Igor">
+    
+
+    
+    <meta property="og:title" content="Blog">
+    <meta property="og:description" content="Personal blog and project showcase">
+    <meta property="og:type" content="website">
+    
+
+    
+    <link rel="alternate" type="application/rss+xml" title="IF" href="/feed.xml">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+                    },
+                    colors: {
+                        accent: {
+                            DEFAULT: '#2563eb',
+                            dark: '#60a5fa',
+                        },
+                    },
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                maxWidth: '700px',
+                                lineHeight: '1.75',
+                                fontSize: '1.125rem',
+                            },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    
+    <script>
+        (function() {
+            var theme = localStorage.getItem('theme');
+            if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+
+    <style>
+        html { transition: background-color 0.2s ease, color 0.2s ease; }
+
+         
+        .chroma { background: #f8f8f8; border-radius: 0.5rem; padding: 1rem; overflow-x: auto; font-size: 0.875rem; }
+        .dark .chroma { background: #1e1e2e; }
+
+         
+        .dark .chroma .kd, .dark .chroma .k { color: #cba6f7; }
+        .dark .chroma .s, .dark .chroma .s2, .dark .chroma .s1 { color: #a6e3a1; }
+        .dark .chroma .c, .dark .chroma .c1, .dark .chroma .cm { color: #6c7086; }
+        .dark .chroma .n, .dark .chroma .na, .dark .chroma .nb { color: #cdd6f4; }
+        .dark .chroma .mi, .dark .chroma .mf { color: #fab387; }
+        .dark .chroma .o, .dark .chroma .p { color: #89b4fa; }
+
+         
+        :not(pre) > code {
+            background: #f1f5f9;
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+        .dark :not(pre) > code {
+            background: #1e293b;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col font-sans">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-accent text-white px-4 py-2 rounded z-50">Skip to content</a>
+
+    
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-gray-950/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+        <nav class="max-w-3xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="/" class="text-lg font-semibold hover:text-accent dark:hover:text-accent-dark transition-colors">
+                IF
+            </a>
+
+            
+            <div class="hidden sm:flex items-center gap-6">
+                <a href="/blog" class="text-sm font-medium hover:text-accent dark:hover:text-accent-dark transition-colors text-accent dark:text-accent-dark">Blog</a>
+                <a href="/projects" class="text-sm font-medium hover:text-accent dark:hover:text-accent-dark transition-colors">Projects</a>
+                <a href="/about" class="text-sm font-medium hover:text-accent dark:hover:text-accent-dark transition-colors">About</a>
+                <button id="theme-toggle" aria-label="Toggle dark mode" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    
+                    <svg class="hidden dark:block w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    
+                    <svg class="block dark:hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
+            </div>
+
+            
+            <div class="flex items-center gap-2 sm:hidden">
+                <button id="theme-toggle-mobile" aria-label="Toggle dark mode" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <svg class="hidden dark:block w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <svg class="block dark:hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
+                <button id="menu-toggle" aria-label="Toggle menu" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        
+        <div id="mobile-menu" class="hidden sm:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
+            <div class="px-4 py-3 space-y-2">
+                <a href="/blog" class="block py-2 text-sm font-medium hover:text-accent dark:hover:text-accent-dark">Blog</a>
+                <a href="/projects" class="block py-2 text-sm font-medium hover:text-accent dark:hover:text-accent-dark">Projects</a>
+                <a href="/about" class="block py-2 text-sm font-medium hover:text-accent dark:hover:text-accent-dark">About</a>
+            </div>
+        </div>
+    </header>
+
+    
+    <main id="main-content" class="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        
+<h1 class="text-2xl font-bold mb-6">Blog</h1>
+
+
+<div class="mb-6">
+    <input
+        type="search"
+        id="search-input"
+        placeholder="Search posts..."
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
+    >
+</div>
+
+
+
+<div class="flex flex-wrap gap-2 mb-8">
+    <a href="/blog" class="text-xs px-3 py-1 rounded-full border bg-accent text-white border-accent transition-colors">All</a>
+    
+    <a href="/blog/tag/blog" class="text-xs px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700 hover:border-accent dark:hover:border-accent-dark transition-colors">blog</a>
+    
+    <a href="/blog/tag/go" class="text-xs px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700 hover:border-accent dark:hover:border-accent-dark transition-colors">go</a>
+    
+</div>
+
+
+
+<div id="post-list" class="space-y-6">
+    
+    <article class="post-item" data-title="Hello World" data-tags="go blog " data-excerpt="Welcome to my new blog, built with a custom Go static site generator.">
+        <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
+            <time datetime="2026-04-04" class="text-sm text-gray-500 dark:text-gray-400 shrink-0">Apr 4, 2026</time>
+            <h2 class="text-lg font-medium">
+                <a href="/blog/hello-world" class="text-accent dark:text-accent-dark hover:underline">Hello World</a>
+            </h2>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-1.5 ml-0 sm:ml-[calc(5rem+1rem)]">
+            
+            <a href="/blog/tag/go" class="text-xs px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">go</a>
+            
+            <a href="/blog/tag/blog" class="text-xs px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">blog</a>
+            
+        </div>
+        
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1.5 ml-0 sm:ml-[calc(5rem+1rem)]">Welcome to my new blog, built with a custom Go static site generator.</p>
+        
+    </article>
+    
+</div>
+
+<div id="no-results" class="hidden text-center text-gray-500 dark:text-gray-400 py-8">
+    No posts found.
+</div>
+
+
+
+
+    </main>
+
+    
+    <footer class="border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
+            <div class="flex justify-center gap-4 mb-4">
+                
+                <a href="https://github.com/IgorFroehner" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark transition-colors" aria-label="GitHub">
+                    GitHub
+                </a>
+                
+            </div>
+            <p>&copy; 2026 Igor. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js" defer></script>
+</body>
+</html>
+
+

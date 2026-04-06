@@ -1,0 +1,8 @@
+title: "IF"
+description: "Personal blog and project showcase"
+author: "Igor"
+url: "https://example.com"
+intro: "Hi, I'm Igor. I write about software engineering, Go, and things I find interesting."
+social:
+  GitHub: "https://github.com/IgorFroehner"
+postsPerPage: 10

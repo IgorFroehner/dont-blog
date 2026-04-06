@@ -1,0 +1,26 @@
+{{define "content"}}
+<h1 class="text-2xl font-bold mb-8">Projects</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {{range .Projects}}
+    <div class="border border-gray-200 dark:border-gray-800 rounded-lg p-5 hover:shadow-md transition-shadow">
+        <h2 class="text-lg font-semibold mb-2">{{.Title}}</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">{{.Description}}</p>
+        {{if .HTMLContent}}
+        <div class="prose prose-sm dark:prose-invert max-w-none mb-3">
+            {{.HTMLContent}}
+        </div>
+        {{end}}
+        <div class="flex flex-wrap gap-1.5 mb-3">
+            {{range .Tags}}
+            <span class="text-xs px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full">{{.}}</span>
+            {{end}}
+        </div>
+        <div class="flex gap-3 text-sm">
+            {{if .URL}}<a href="{{.URL}}" target="_blank" rel="noopener noreferrer" class="text-accent dark:text-accent-dark hover:underline">Repository</a>{{end}}
+            {{if .Demo}}<a href="{{.Demo}}" target="_blank" rel="noopener noreferrer" class="text-accent dark:text-accent-dark hover:underline">Demo</a>{{end}}
+        </div>
+    </div>
+    {{end}}
+</div>
+{{end}}
