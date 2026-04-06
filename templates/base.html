@@ -66,17 +66,45 @@
     <style>
         html { transition: background-color 0.2s ease, color 0.2s ease; }
 
-        /* Chroma light theme overrides */
-        .chroma { background: #f8f8f8; border-radius: 0.5rem; padding: 1rem; overflow-x: auto; font-size: 0.875rem; }
-        .dark .chroma { background: #1e1e2e; }
+        /* Chroma syntax highlighting — light (One Light inspired) */
+        .chroma { background: #fafafa; border-radius: 0.5rem; padding: 1rem; overflow-x: auto; font-size: 0.875rem; color: #383a42; }
+        .chroma .ln { color: #9d9d9f; margin-right: 0.75em; }
+        .chroma .k, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr, .chroma .kt { color: #a626a4; font-weight: 600; }
+        .chroma .kc { color: #0184bc; font-weight: 600; }
+        .chroma .n, .chroma .no, .chroma .ni, .chroma .ne, .chroma .nn { color: #383a42; }
+        .chroma .na, .chroma .nb, .chroma .nc, .chroma .nf { color: #4078f2; }
+        .chroma .nd { color: #a626a4; }
+        .chroma .nv, .chroma .nx { color: #e45649; }
+        .chroma .s, .chroma .s1, .chroma .s2, .chroma .sb, .chroma .sh, .chroma .sx { color: #50a14f; }
+        .chroma .sa, .chroma .sc, .chroma .dl, .chroma .se { color: #50a14f; }
+        .chroma .sr { color: #0184bc; }
+        .chroma .si { color: #ca1243; }
+        .chroma .c, .chroma .c1, .chroma .ch, .chroma .cm, .chroma .cs { color: #a0a1a7; font-style: italic; }
+        .chroma .cp, .chroma .cpf { color: #a0a1a7; }
+        .chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi, .chroma .il, .chroma .mo { color: #986801; }
+        .chroma .o, .chroma .ow { color: #a626a4; }
+        .chroma .p { color: #383a42; }
+        .chroma .ge { font-style: italic; }
+        .chroma .gs { font-weight: 700; }
 
-        /* Code block text colors for dark mode */
-        .dark .chroma .kd, .dark .chroma .k { color: #cba6f7; }
-        .dark .chroma .s, .dark .chroma .s2, .dark .chroma .s1 { color: #a6e3a1; }
-        .dark .chroma .c, .dark .chroma .c1, .dark .chroma .cm { color: #6c7086; }
-        .dark .chroma .n, .dark .chroma .na, .dark .chroma .nb { color: #cdd6f4; }
-        .dark .chroma .mi, .dark .chroma .mf { color: #fab387; }
-        .dark .chroma .o, .dark .chroma .p { color: #89b4fa; }
+        /* Chroma syntax highlighting — dark (Catppuccin Mocha) */
+        .dark .chroma { background: #1e1e2e; color: #cdd6f4; }
+        .dark .chroma .ln { color: #585b70; }
+        .dark .chroma .k, .dark .chroma .kd, .dark .chroma .kn, .dark .chroma .kp, .dark .chroma .kr, .dark .chroma .kt { color: #cba6f7; font-weight: 600; }
+        .dark .chroma .kc { color: #fab387; font-weight: 600; }
+        .dark .chroma .n, .dark .chroma .no, .dark .chroma .ni, .dark .chroma .ne, .dark .chroma .nn { color: #cdd6f4; }
+        .dark .chroma .na, .dark .chroma .nb, .dark .chroma .nc, .dark .chroma .nf { color: #89b4fa; }
+        .dark .chroma .nd { color: #cba6f7; }
+        .dark .chroma .nv, .dark .chroma .nx { color: #f38ba8; }
+        .dark .chroma .s, .dark .chroma .s1, .dark .chroma .s2, .dark .chroma .sb, .dark .chroma .sh, .dark .chroma .sx { color: #a6e3a1; }
+        .dark .chroma .sa, .dark .chroma .sc, .dark .chroma .dl, .dark .chroma .se { color: #a6e3a1; }
+        .dark .chroma .sr { color: #89dceb; }
+        .dark .chroma .si { color: #f38ba8; }
+        .dark .chroma .c, .dark .chroma .c1, .dark .chroma .ch, .dark .chroma .cm, .dark .chroma .cs { color: #6c7086; font-style: italic; }
+        .dark .chroma .cp, .dark .chroma .cpf { color: #6c7086; }
+        .dark .chroma .m, .dark .chroma .mb, .dark .chroma .mf, .dark .chroma .mh, .dark .chroma .mi, .dark .chroma .il, .dark .chroma .mo { color: #fab387; }
+        .dark .chroma .o, .dark .chroma .ow { color: #89dceb; }
+        .dark .chroma .p { color: #cdd6f4; }
 
         /* Inline code */
         :not(pre) > code {

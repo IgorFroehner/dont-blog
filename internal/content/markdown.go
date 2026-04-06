@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"regexp"
 
+	chromahtml "github.com/alecthomas/chroma/v2/formatters/html"
 	highlighting "github.com/yuin/goldmark-highlighting/v2"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/extension"
@@ -20,8 +21,9 @@ func newMarkdown() goldmark.Markdown {
 			extension.GFM,
 			extension.Footnote,
 			highlighting.NewHighlighting(
-				highlighting.WithStyle("github"),
-				highlighting.WithFormatOptions(),
+				highlighting.WithFormatOptions(
+					chromahtml.WithClasses(true),
+				),
 			),
 		),
 		goldmark.WithParserOptions(
