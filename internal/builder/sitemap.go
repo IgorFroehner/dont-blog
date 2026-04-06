@@ -18,7 +18,7 @@ type sitemapURLSet struct {
 	URLs    []sitemapURL `xml:"url"`
 }
 
-func generateSitemap(cfg *config.SiteConfig, posts []content.Post, projects []content.Project, tagIndex map[string][]content.Post, outputPath string) error {
+func generateSitemap(cfg *config.SiteConfig, posts []content.Post, tagIndex map[string][]content.Post, outputPath string) error {
 	var urls []sitemapURL
 
 	urls = append(urls, sitemapURL{Loc: cfg.URL})

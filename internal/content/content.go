@@ -1,6 +1,7 @@
 package content
 
 import (
+	"fmt"
 	"html/template"
 	"os"
 	"path/filepath"
@@ -93,7 +94,10 @@ func LoadPosts(dir string) ([]Post, error) {
 			continue
 		}
 
-		date, _ := time.Parse("2006-01-02", meta.Date)
+		date, err := time.Parse("2006-01-02", meta.Date)
+		if err != nil {
+			return nil, fmt.Errorf("post %s: invalid date %q: %w", e.Name(), meta.Date, err)
+		}
 		slug := slugFromFilename(e.Name())
 
 		posts = append(posts, Post{
@@ -194,12 +198,12 @@ func splitFrontmatter(data []byte) (frontmatter []byte, body []byte, err error) 
 		return nil, data, nil
 	}
 
-	end := strings.Index(s[4:], "\n---")
+	end := strings.Index(s[4:], "\n---\n")
 	if end == -1 {
 		return nil, data, nil
 	}
 
 	fm := []byte(s[4 : 4+end])
-	rest := []byte(s[4+end+4:])
+	rest := []byte(s[4+end+5:])
 	return fm, rest, nil
 }

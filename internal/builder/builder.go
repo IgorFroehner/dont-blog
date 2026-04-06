@@ -8,7 +8,6 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
-	"strings"
 	"time"
 
 	"github.com/igor/my-go-site/internal/config"
@@ -16,6 +15,19 @@ import (
 )
 
 const distDir = "dist"
+
+const aboutRedirectHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0;url=/">
+<link rel="canonical" href="/">
+<title>Redirecting…</title>
+</head>
+<body>
+<p>Redirecting to <a href="/">home</a>…</p>
+</body>
+</html>`
 
 type PageData struct {
 	Site             *config.SiteConfig
@@ -100,6 +112,7 @@ func Build(configPath string, templateFS, staticFS embed.FS) error {
 	if err := renderPage(templates, "home.html", "index.html", PageData{
 		Site: cfg, CurrentPath: "/", Year: year,
 		RecentPosts: recentPosts, FeaturedProjects: featuredProjects,
+		About: about,
 	}); err != nil {
 		return err
 	}
@@ -140,12 +153,9 @@ func Build(configPath string, templateFS, staticFS embed.FS) error {
 		return err
 	}
 
-	// About page
-	if err := renderPage(templates, "about.html", filepath.Join("about", "index.html"), PageData{
-		Site: cfg, CurrentPath: "/about", Year: year,
-		PageTitle: "About", About: about,
-	}); err != nil {
-		return err
+	// About page — redirect to home
+	if err := writeFile(filepath.Join(distDir, "about", "index.html"), aboutRedirectHTML); err != nil {
+		return fmt.Errorf("writing about redirect: %w", err)
 	}
 
 	// RSS feed
@@ -169,7 +179,7 @@ func Build(configPath string, templateFS, staticFS embed.FS) error {
 	}
 
 	// Sitemap
-	if err := generateSitemap(cfg, posts, projects, tagIndex, filepath.Join(distDir, "sitemap.xml")); err != nil {
+	if err := generateSitemap(cfg, posts, tagIndex, filepath.Join(distDir, "sitemap.xml")); err != nil {
 		return fmt.Errorf("generating sitemap: %w", err)
 	}
 
@@ -187,7 +197,7 @@ func parseTemplates(templateFS embed.FS) (map[string]*template.Template, error) 
 		return nil, fmt.Errorf("reading base template: %w", err)
 	}
 
-	pages := []string{"home.html", "blog.html", "post.html", "projects.html", "about.html", "tag.html"}
+	pages := []string{"home.html", "blog.html", "post.html", "projects.html", "tag.html"}
 	templates := make(map[string]*template.Template, len(pages))
 
 	for _, page := range pages {
@@ -281,15 +291,18 @@ func copyDir(src, dst string) error {
 		return nil
 	}
 
-	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+	return filepath.WalkDir(src, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
 
-		rel, _ := filepath.Rel(src, path)
+		rel, err := filepath.Rel(src, path)
+		if err != nil {
+			return err
+		}
 		target := filepath.Join(dst, rel)
 
-		if info.IsDir() {
+		if d.IsDir() {
 			return os.MkdirAll(target, 0o755)
 		}
 
@@ -333,19 +346,3 @@ func writeFileBytes(path string, data []byte) error {
 	return os.WriteFile(path, data, 0o644)
 }
 
-// stripHTML removes HTML tags from a string.
-func stripHTML(s string) string {
-	var result strings.Builder
-	inTag := false
-	for _, r := range s {
-		switch {
-		case r == '<':
-			inTag = true
-		case r == '>':
-			inTag = false
-		case !inTag:
-			result.WriteRune(r)
-		}
-	}
-	return result.String()
-}

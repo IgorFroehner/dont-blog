@@ -1,44 +1,64 @@
 {{define "content"}}
-<section class="mb-12">
+<!-- ASCII Hero -->
+<section class="hidden sm:block mb-12">
+    <div class="flex justify-center">
+        <pre id="ascii-hero" class="font-mono text-2xl md:text-3xl leading-tight text-accent dark:text-accent-dark select-none" aria-hidden="true">██╗███████╗
+██║██╔════╝
+██║█████╗
+██║██╔══╝
+██║██║
+╚═╝╚═╝</pre>
+    </div>
+</section>
+
+<!-- Intro -->
+<section class="mb-8">
     <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">{{.Site.Intro}}</p>
 </section>
 
-{{if .RecentPosts}}
-<section class="mb-12">
-    <h2 class="text-xl font-semibold mb-6">Recent Posts</h2>
-    <ul class="space-y-3">
-        {{range .RecentPosts}}
-        <li class="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
-            <time datetime="{{.Date.Format "2006-01-02"}}" class="text-sm text-gray-500 dark:text-gray-400 shrink-0">{{.Date.Format "Jan 2, 2006"}}</time>
-            <a href="/blog/{{.Slug}}" class="text-accent dark:text-accent-dark hover:underline font-medium">{{.Title}}</a>
-        </li>
-        {{end}}
-    </ul>
-    <a href="/blog" class="inline-block mt-4 text-sm text-accent dark:text-accent-dark hover:underline">All posts &rarr;</a>
+<!-- Bio from about.md -->
+{{if .About}}
+<section class="mb-16">
+    <article class="prose prose-lg dark:prose-invert prose-a:text-accent dark:prose-a:text-accent-dark max-w-none">
+        {{.About.HTMLContent}}
+    </article>
 </section>
 {{end}}
 
-{{if .FeaturedProjects}}
-<section>
-    <h2 class="text-xl font-semibold mb-6">Featured Projects</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {{range .FeaturedProjects}}
-        <div class="border border-gray-200 dark:border-gray-800 rounded-lg p-5 hover:shadow-md transition-shadow">
-            <h3 class="font-semibold mb-1">{{.Title}}</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">{{.Description}}</p>
-            <div class="flex flex-wrap gap-1.5 mb-3">
-                {{range .Tags}}
-                <span class="text-xs px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full">{{.}}</span>
-                {{end}}
-            </div>
-            <div class="flex gap-3 text-sm">
-                {{if .URL}}<a href="{{.URL}}" target="_blank" rel="noopener noreferrer" class="text-accent dark:text-accent-dark hover:underline">Repository</a>{{end}}
-                {{if .Demo}}<a href="{{.Demo}}" target="_blank" rel="noopener noreferrer" class="text-accent dark:text-accent-dark hover:underline">Demo</a>{{end}}
-            </div>
-        </div>
-        {{end}}
+<!-- Navigation Cards -->
+<section class="border-t border-gray-200 dark:border-gray-800 pt-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- Blog Card -->
+        <a href="/blog" class="group block border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:border-accent dark:hover:border-accent-dark transition-colors">
+            <h2 class="text-lg font-semibold mb-2 group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">Blog</h2>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Writing on software engineering, Go, and things I find interesting.</p>
+            {{if .RecentPosts}}
+            <ul class="space-y-1.5 mb-4">
+                {{range $i, $p := .RecentPosts}}{{if lt $i 2}}
+                <li class="text-sm text-gray-500 dark:text-gray-400 truncate">
+                    <span class="text-gray-400 dark:text-gray-500 mr-1">→</span> {{$p.Title}}
+                </li>
+                {{end}}{{end}}
+            </ul>
+            {{end}}
+            <span class="text-sm text-accent dark:text-accent-dark font-medium">All posts &rarr;</span>
+        </a>
+
+        <!-- Projects Card -->
+        <a href="/projects" class="group block border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:border-accent dark:hover:border-accent-dark transition-colors">
+            <h2 class="text-lg font-semibold mb-2 group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">Projects</h2>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Things I've built and contributed to.</p>
+            {{if .FeaturedProjects}}
+            <ul class="space-y-1.5 mb-4">
+                {{range $i, $p := .FeaturedProjects}}{{if lt $i 2}}
+                <li class="text-sm text-gray-500 dark:text-gray-400 truncate">
+                    <span class="text-gray-400 dark:text-gray-500 mr-1">→</span> {{$p.Title}}
+                </li>
+                {{end}}{{end}}
+            </ul>
+            {{end}}
+            <span class="text-sm text-accent dark:text-accent-dark font-medium">All projects &rarr;</span>
+        </a>
     </div>
-    <a href="/projects" class="inline-block mt-4 text-sm text-accent dark:text-accent-dark hover:underline">All projects &rarr;</a>
 </section>
-{{end}}
 {{end}}

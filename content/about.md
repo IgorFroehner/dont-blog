@@ -6,4 +6,4 @@ This site is built with a custom Go static site generator. The source code is av
 
 ## Get in Touch
 
-You can find me on [GitHub](https://github.com/igor).
+You can find me on [GitHub](https://github.com/IgorFroehner).

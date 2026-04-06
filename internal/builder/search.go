@@ -39,8 +39,25 @@ func generateSearchIndex(posts []content.Post, outputPath string) error {
 func contentPreview(html string, maxLen int) string {
 	plain := stripHTML(html)
 	plain = strings.Join(strings.Fields(plain), " ")
-	if len(plain) > maxLen {
-		plain = plain[:maxLen] + "..."
+	runes := []rune(plain)
+	if len(runes) > maxLen {
+		return string(runes[:maxLen]) + "..."
 	}
 	return plain
+}
+
+func stripHTML(s string) string {
+	var result strings.Builder
+	inTag := false
+	for _, r := range s {
+		switch {
+		case r == '<':
+			inTag = true
+		case r == '>':
+			inTag = false
+		case !inTag:
+			result.WriteRune(r)
+		}
+	}
+	return result.String()
 }

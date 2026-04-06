@@ -1,6 +1,7 @@
 package server
 
 import (
+	"bytes"
 	"embed"
 	"fmt"
 	"log"
@@ -146,7 +147,7 @@ func injectReloadScript(next http.Handler) http.Handler {
 		next.ServeHTTP(rec, r)
 
 		body := rec.body
-		if len(body) > 0 && rec.contentType == "text/html" || hasHTMLExtension(r.URL.Path) {
+		if len(body) > 0 && (rec.contentType == "text/html" || hasHTMLExtension(r.URL.Path)) {
 			replaced := replaceLastOccurrence(body, []byte("</body>"), reloadScript)
 			w.Header().Set("Content-Length", fmt.Sprintf("%d", len(replaced)))
 			w.WriteHeader(rec.statusCode)
@@ -184,14 +185,13 @@ func hasHTMLExtension(path string) bool {
 }
 
 func replaceLastOccurrence(s, old, new []byte) []byte {
-	for i := len(s) - len(old); i >= 0; i-- {
-		if string(s[i:i+len(old)]) == string(old) {
-			result := make([]byte, 0, len(s)-len(old)+len(new))
-			result = append(result, s[:i]...)
-			result = append(result, new...)
-			result = append(result, s[i+len(old):]...)
-			return result
-		}
+	i := bytes.LastIndex(s, old)
+	if i == -1 {
+		return s
 	}
-	return s
+	result := make([]byte, 0, len(s)-len(old)+len(new))
+	result = append(result, s[:i]...)
+	result = append(result, new...)
+	result = append(result, s[i+len(old):]...)
+	return result
 }

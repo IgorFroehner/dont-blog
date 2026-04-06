@@ -12,10 +12,10 @@ import (
 	"github.com/yuin/goldmark/renderer/html"
 )
 
-var md goldmark.Markdown
+var md = newMarkdown()
 
-func init() {
-	md = goldmark.New(
+func newMarkdown() goldmark.Markdown {
+	return goldmark.New(
 		goldmark.WithExtensions(
 			extension.GFM,
 			extension.Footnote,
