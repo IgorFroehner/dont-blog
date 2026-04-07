@@ -9,11 +9,14 @@
 ██║██║
 ╚═╝╚═╝</pre>
     </div>
-</section>
-
-<!-- Intro -->
-<section class="mb-8">
-    <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">{{.Site.Intro}}</p>
+    <div class="flex justify-center gap-5 mt-4">
+        {{with index .Site.Social "GitHub"}}
+        <a href="{{.}}" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-accent dark:text-gray-400 dark:hover:text-accent-dark transition-colors" aria-label="GitHub">{{template "icon-github"}}</a>
+        {{end}}
+        {{with index .Site.Social "X"}}
+        <a href="{{.}}" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-accent dark:text-gray-400 dark:hover:text-accent-dark transition-colors" aria-label="X">{{template "icon-x"}}</a>
+        {{end}}
+    </div>
 </section>
 
 <!-- Bio from about.md -->

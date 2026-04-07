@@ -14,6 +14,9 @@
     <meta property="og:type" content="{{if .IsPost}}article{{else}}website{{end}}">
     {{if .CanonicalURL}}<meta property="og:url" content="{{.CanonicalURL}}">{{end}}
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="{{.Site.Title}}" href="/feed.xml">
 
@@ -130,34 +133,23 @@
 
             <!-- Desktop nav -->
             <div class="hidden sm:flex items-center gap-6">
+                <a href="/" class="text-sm font-medium hover:text-accent dark:hover:text-accent-dark transition-colors{{if eq .CurrentPath "/"}} text-accent dark:text-accent-dark{{end}}">About</a>
                 <a href="/blog" class="text-sm font-medium hover:text-accent dark:hover:text-accent-dark transition-colors{{if eq .CurrentPath "/blog"}} text-accent dark:text-accent-dark{{end}}">Blog</a>
                 <a href="/projects" class="text-sm font-medium hover:text-accent dark:hover:text-accent-dark transition-colors{{if eq .CurrentPath "/projects"}} text-accent dark:text-accent-dark{{end}}">Projects</a>
                 <button id="theme-toggle" aria-label="Toggle dark mode" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                    <!-- Sun icon (shown in dark mode) -->
-                    <svg class="hidden dark:block w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                    </svg>
-                    <!-- Moon icon (shown in light mode) -->
-                    <svg class="block dark:hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                    </svg>
+                    <span class="hidden dark:block">{{template "icon-sun"}}</span>
+                    <span class="block dark:hidden">{{template "icon-moon"}}</span>
                 </button>
             </div>
 
             <!-- Mobile nav toggle -->
             <div class="flex items-center gap-2 sm:hidden">
                 <button id="theme-toggle-mobile" aria-label="Toggle dark mode" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                    <svg class="hidden dark:block w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                    </svg>
-                    <svg class="block dark:hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                    </svg>
+                    <span class="hidden dark:block">{{template "icon-sun"}}</span>
+                    <span class="block dark:hidden">{{template "icon-moon"}}</span>
                 </button>
                 <button id="menu-toggle" aria-label="Toggle menu" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
+                    {{template "icon-menu"}}
                 </button>
             </div>
         </nav>
@@ -165,6 +157,7 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden sm:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
             <div class="px-4 py-3 space-y-2">
+                <a href="/" class="block py-2 text-sm font-medium hover:text-accent dark:hover:text-accent-dark">About</a>
                 <a href="/blog" class="block py-2 text-sm font-medium hover:text-accent dark:hover:text-accent-dark">Blog</a>
                 <a href="/projects" class="block py-2 text-sm font-medium hover:text-accent dark:hover:text-accent-dark">Projects</a>
             </div>
@@ -178,15 +171,9 @@
 
     <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-gray-800">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
-            <div class="flex justify-center gap-4 mb-4">
-                {{range $name, $url := .Site.Social}}
-                <a href="{{$url}}" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark transition-colors" aria-label="{{$name}}">
-                    {{$name}}
-                </a>
-                {{end}}
-            </div>
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
             <p>&copy; {{.Year}} {{.Site.Author}}. All rights reserved.</p>
+            {{with index .Site.Social "GitHub"}}<a href="{{.}}" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark transition-colors" aria-label="GitHub">{{template "icon-github"}}</a>{{end}}
         </div>
     </footer>
 

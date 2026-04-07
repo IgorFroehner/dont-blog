@@ -197,6 +197,11 @@ func parseTemplates(templateFS embed.FS) (map[string]*template.Template, error) 
 		return nil, fmt.Errorf("reading base template: %w", err)
 	}
 
+	iconsContent, err := fs.ReadFile(templateFS, "templates/icons.html")
+	if err != nil {
+		return nil, fmt.Errorf("reading icons template: %w", err)
+	}
+
 	pages := []string{"home.html", "blog.html", "post.html", "projects.html", "tag.html"}
 	templates := make(map[string]*template.Template, len(pages))
 
@@ -206,7 +211,7 @@ func parseTemplates(templateFS embed.FS) (map[string]*template.Template, error) 
 			return nil, fmt.Errorf("reading template %s: %w", page, err)
 		}
 
-		combined := string(baseContent) + "\n" + string(pageContent)
+		combined := string(iconsContent) + "\n" + string(baseContent) + "\n" + string(pageContent)
 		t, err := template.New(page).Funcs(funcMap).Parse(combined)
 		if err != nil {
 			return nil, fmt.Errorf("parsing template %s: %w", page, err)

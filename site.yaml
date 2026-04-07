@@ -2,7 +2,7 @@ title: "IF"
 description: "Personal blog and project showcase"
 author: "Igor"
 url: "https://example.com"
-intro: "Hi, I'm Igor. I write about software engineering, Go, and things I find interesting."
 social:
   GitHub: "https://github.com/IgorFroehner"
+  X: "https://x.com/idk_the_if"
 postsPerPage: 10

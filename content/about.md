@@ -1,9 +1,9 @@
-## About Me
 
-Hi! I'm Igor, a software engineer who enjoys building tools and writing about technology.
+Hi! I'm Igor, a software engineer based in Curitiba, Brazil.
 
-This site is built with a custom Go static site generator. The source code is available on [GitHub](https://github.com/igor/my-go-site).
+I'm interested in programming languages, compilers, and systems programming. I work across several languages — Rust, Go, Ruby, TypeScript, and others — and I enjoy building tools and exploring how things work under the hood.
 
-## Get in Touch
+I'm an open source enthusiast and like to share what I learn along the way. This site is where I write about things I find interesting.
 
-You can find me on [GitHub](https://github.com/IgorFroehner).
+You can find me on [GitHub](https://github.com/IgorFroehner) and [X](https://x.com/idk_the_if).
+
