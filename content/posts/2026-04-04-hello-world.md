@@ -2,7 +2,7 @@
 title: "Hello World"
 date: 2026-04-04
 tags: ["go", "blog"]
-draft: false
+draft: true
 excerpt: "Welcome to my new blog, built with a custom Go static site generator."
 ---
 
