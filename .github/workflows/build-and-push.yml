@@ -50,7 +50,14 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Trigger Coolify redeploy
-        if: ${{ env.COOLIFY_WEBHOOK_URL != '' }}
         env:
           COOLIFY_WEBHOOK_URL: ${{ secrets.COOLIFY_WEBHOOK_URL }}
-        run: curl -fsSL -X GET "$COOLIFY_WEBHOOK_URL"
+          COOLIFY_API_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
+        run: |
+          if [ -z "$COOLIFY_WEBHOOK_URL" ] || [ -z "$COOLIFY_API_TOKEN" ]; then
+            echo "Skipping redeploy: COOLIFY_WEBHOOK_URL or COOLIFY_API_TOKEN not set."
+            exit 0
+          fi
+          curl -fsSL -X GET \
+            -H "Authorization: Bearer $COOLIFY_API_TOKEN" \
+            "$COOLIFY_WEBHOOK_URL"
