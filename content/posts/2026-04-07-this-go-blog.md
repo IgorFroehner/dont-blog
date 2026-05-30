@@ -1,16 +1,30 @@
 ---
 title: "Building This Blog: A Custom Static Site Generator in Go"
 date: 2026-04-07
-tags: ["go", "blog", "projects"]
-draft: true
+tags: ["go", "projects"]
+draft: false
 excerpt: "Why I built my own SSG in Go instead of using Hugo, and how it works under the hood."
 ---
 
 **This post was entirely AI generated**
 
+This post is written in Markdown and rendered by a custom static site generator built in Go.
+
 There are plenty of static site generators out there. Hugo, Jekyll, Eleventy, Astro — all excellent tools. So why build another one?
 
-Because building your own is the whole point. You learn more about Go, you get exactly the features you want, and you end up with something you actually understand top to bottom. This post is a walkthrough of how this site works.
+Because building your own is the whole point. You learn more about Go, you get exactly the features you want, and you end up with something you actually understand top to bottom. This post is both a welcome note and a walkthrough of how this site works.
+
+## What This Generator Supports
+
+The short version:
+
+- **Markdown** with CommonMark and GFM extensions
+- **Syntax highlighting** with Chroma
+- **Dark/light mode** that respects your system preference
+- **RSS feed** for subscribers
+- **Client-side search** across all posts
+
+The rest of this post explains how those pieces fit together.
 
 ## The Big Picture
 

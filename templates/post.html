@@ -2,6 +2,9 @@
 <article>
     <header class="mb-8">
         <h1 class="text-3xl sm:text-4xl font-bold mb-3 leading-tight">{{.Post.Title}}</h1>
+        {{if .Post.Excerpt}}
+        <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-5 leading-relaxed">{{.Post.Excerpt}}</p>
+        {{end}}
         <div class="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
             <time datetime="{{.Post.Date.Format "2006-01-02"}}">{{.Post.Date.Format "January 2, 2006"}}</time>
             {{if .Post.Tags}}

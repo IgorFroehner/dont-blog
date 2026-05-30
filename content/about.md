@@ -1,9 +1,15 @@
 
-Hi! I'm Igor, a software engineer based in Curitiba, Brazil.
+Hi! I'm Igor, a software engineer.
 
-I'm interested in programming languages, compilers, and systems programming. I work across several languages — Rust, Go, Ruby, TypeScript, and others — and I enjoy building tools and exploring how things work under the hood.
+I'm a generalist, I love to learn and be challenged with things that I don't know. The study, the specialization and the experience are just tools
+to go further and not the final objective.
 
-I'm an open source enthusiast and like to share what I learn along the way. This site is where I write about things I find interesting.
+Most of my career so far has been in full-stack product engineering: building features end-to-end, working closely with product and design, and
+owning systems through the messy parts: integrations, infrastructure, algorithms that need to actually behave in production. I've have experience
+time on healthcare, and real state platforms, and earlier on machine learning research at university.
 
-You can find me on [GitHub](https://github.com/IgorFroehner), [X](https://x.com/idk_the_if), and [linkedin](https://www.linkedin.com/in/igor-froehner/).
+Day to day I bounce between Rust, Go, Ruby, and TypeScript depending on what I'm building. I love shipping, building tools, digging into how things
+work under the hood, and being nice to the people I work with. I'm an open source enthusiast and try to share what I learn along the way — this site
+is where most of that ends up.
 
+You can find me on [GitHub](https://github.com/IgorFroehner), [X](https://x.com/idk_the_if), and [LinkedIn](https://www.linkedin.com/in/igor-froehner/).
